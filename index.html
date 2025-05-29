@@ -18,14 +18,18 @@
         root.appendChild(heading);
       </script> -->
 
-      <script
+      <!-- <script
         crossorigin
         src="https://unpkg.com/react@18/umd/react.development.js"
       ></script>
       <script
         crossorigin
         src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-      ></script>
+      ></script> -->
+
+      <!-- The above script links are commented as we intalled react and react dom using the npm links
+       rather than using a link which is a costly opertaion to call that link everytime, we directly intalled the 
+       react into the project -->
 
       <!-- <script>
         const heading = React.createElement("h1", {}, "Hello World from React");
@@ -34,7 +38,7 @@
       </script> -->
       <!-- ALl the above code moved to the App.js page -->
 
-      <script src="App.js"></script>
+      <script type="module" src="App.js"></script>
 
     </div>
   </body>

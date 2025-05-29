@@ -1,3 +1,9 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+//Below is the implementation of the above HTML using React.createElement which is very complicated and messy
+// It is recommended to use JSX syntax instead for better readability and maintainability.
+
 {
   /* <div id="parent">
   <div id="child1">
@@ -10,9 +16,6 @@
   </div>
 </div>; */
 }
-
-//Below is the implementation of the above HTML using React.createElement which is very complicated and messy
-// It is recommended to use JSX syntax instead for better readability and maintainability.
 
 const heading = React.createElement("div", { id: "parent" }, [
   React.createElement("div", { id: "child1" }, [
@@ -30,8 +33,6 @@ const heading = React.createElement("div", { id: "parent" }, [
 //     { id: "heading" },
 //     React.createElement("h2", { id: "heading2" }, "Good Morning from React")
 //   );
-
-console.log(heading);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(heading);
