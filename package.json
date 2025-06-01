@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "This is react by venkanna babu",
   "scripts": {
+    "start": "parcel index.html", 
+    "dev": "parcel index.html --open", 
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "keywords": [

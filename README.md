@@ -17,4 +17,9 @@
  - HTTPs
  - Treek shaking : removes unneesary code
  - Differentdeev and prob bundles
+
+ # Script
+ - "start": "parcel index.html", // start the development server (npm run start or npm start)
+ - "dev": "parcel index.html --open", // start the development server and open in browser
+ - "build": "parcel build index.html" (npm run build)
  
