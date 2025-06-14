@@ -23,3 +23,42 @@
  - "dev": "parcel index.html --open", // start the development server and open in browser
  - "build": "parcel build index.html" (npm run build)
  
+ # Food app structure
+
+ /**
+ * Header
+ *  - Logo
+ *  - Nav Items
+ * Body
+ * - Search Bar
+ * - Restaurant Container
+ *    - RestaurantCard
+ *      - Image
+ *      - Name of res, star rating, cuisine, delivery time
+ * - Footer
+ *  - Copyright
+ *  - Links
+ *  - Contact Us
+ *  - Address
+ */
+
+ # Two types of Export / Import
+
+ - Default Export/import
+    - export default Component;
+    - import Component from "path";
+
+- Names Export/Import
+    - export xonst component;
+    - import {Component} from  "path";
+
+
+# React Hooks
+(Normal JS utility functions developed by facebook developers)
+ - useState()
+ - useEffect()
+
+
+# 2 types of Routing in web apps
+    - Client side Routing
+    - Server side Routing

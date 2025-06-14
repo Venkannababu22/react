@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-//Below is the implementation of the above HTML using React.createElement which is very complicated and messy
+//Below is the implementation using React.createElement which is very complicated and messy
 // It is recommended to use JSX syntax instead for better readability and maintainability.
 
 {

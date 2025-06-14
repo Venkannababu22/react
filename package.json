@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "This is react by venkanna babu",
   "scripts": {
-    "start": "parcel index.html", 
-    "dev": "parcel index.html --open", 
+    "start": "parcel index.html",
+    "dev": "parcel index.html --open",
     "build": "parcel build index.html",
     "test": "jest"
   },
@@ -18,7 +18,9 @@
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router": "^6.23.1",
+    "react-router-dom": "^6.23.1"
   },
   "browserslist": [
     "last 2 versions"
