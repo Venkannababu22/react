@@ -1,31 +1,15 @@
-import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { MENUAPI } from "../utils/constants";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
-
   const { resId } = useParams();
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  const resInfo = useRestaurantMenu(resId); // Using custom hook to fetch restaurant data
 
-  const fetchMenu = async () => {
-    const data = await fetch(MENUAPI + resId);
-    console.log("data", data);
-
-    if (!data) {
-      console.error("Failed to fetch data");
-      return;
-    }
-
-    const json = await data.json();
-    setResInfo(json?.data);
-        
-  };
-  
+  const [showIndex, setShowIndex] = useState(0)
 
   if (resInfo === null) {
     return <Shimmer />;
@@ -45,29 +29,31 @@ const RestaurantMenu = () => {
       (item) => item?.card?.info
     ) || [];
 
-    console.log(itemCards);
+  // console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
 
-  const mainTitle =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
-      ?.title;
+  const categories =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c?.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+
+  // const mainTitle =
+  //   resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
+  //     ?.title;
 
   return (
-    <div className="restaurant-menu">
-      <h1>{name}</h1>
-      <h3>
-        {avgRating} ({totalRatingsString}) {costForTwoMessage}
-      </h3>
-      <p>{cuisines.join(", ")}</p>
-      <p>{costForTwoMessage}</p>
-      <p>{sla.slaString}</p>
-      <h2>{mainTitle}</h2>
-      <ul className="menu-items">
-        {itemCards.map((item) => (
-          <li key={item.id}>
-            {item.name} - Rs.{item.price / 100}
-          </li>
-        ))}
-      </ul>
+    <div className="text-center">
+      <h1 className="font-bold my-6 text-2xl">{name}</h1>
+      <p className="font-bold">{cuisines.join(", ")}</p>
+      {categories.map((category, index) => (
+        <RestaurantCategory
+          key={index}
+          data={category.card.card}
+          showItems={index === showIndex ? true : false}
+          setShowIndex = {() => setShowIndex(index)}
+        />
+      ))}
     </div>
   );
 };

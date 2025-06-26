@@ -41,7 +41,7 @@
   width: 100%;
 }
 
-.filter{
+.filter {
   display: flex;
   margin: 10px;
 }
@@ -73,3 +73,9 @@
 .filter {
   display: flex;
 }
+
+.user-card {
+  padding: 10px;
+  border: 1px solid black;
+}
+
