@@ -1,26 +1,25 @@
 import ItemList from "./ItemList";
 
 const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
-
   const handleClick = () => {
-    setShowIndex()
+    setShowIndex();
   };
 
   return (
     <div>
-      {/*Header */}
-      <div className="w-6/12 mx-auto my-4 bg-gray-50 shadow-lg p-4">
+      {/* Header */}
+      <div className="w-11/12 sm:w-6/12 mx-auto my-4 bg-white shadow-md rounded-lg border border-gray-100">
         <div
-          className="flex justify-between cursor-pointer"
+          className="flex justify-between items-center cursor-pointer px-5 py-4 hover:bg-gray-50 transition"
           onClick={handleClick}
         >
-          <span className="font-bold text-md">
+          <span className="font-semibold text-base text-gray-800">
             {data.title} ({data.itemCards.length})
           </span>
-          <span>{!showItems ? "⬇️" : "⬆️"}</span>
-
+          <span className="text-xl">{!showItems ? "⬇️" : "⬆️"}</span>
         </div>
-        {/* Accordian Body */}
+
+        {/* Accordion Body */}
         {showItems && <ItemList items={data.itemCards} />}
       </div>
     </div>

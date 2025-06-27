@@ -6,14 +6,10 @@ import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
+  const resInfo = useRestaurantMenu(resId);
+  const [showIndex, setShowIndex] = useState(0);
 
-  const resInfo = useRestaurantMenu(resId); // Using custom hook to fetch restaurant data
-
-  const [showIndex, setShowIndex] = useState(0)
-
-  if (resInfo === null) {
-    return <Shimmer />;
-  }
+  if (!resInfo) return <Shimmer />;
 
   const {
     name,
@@ -24,13 +20,6 @@ const RestaurantMenu = () => {
     sla,
   } = resInfo?.cards[2]?.card?.card?.info;
 
-  const itemCards =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards.map(
-      (item) => item?.card?.info
-    ) || [];
-
-  // console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
-
   const categories =
     resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
       (c) =>
@@ -38,22 +27,44 @@ const RestaurantMenu = () => {
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     );
 
-  // const mainTitle =
-  //   resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
-  //     ?.title;
-
   return (
-    <div className="text-center">
-      <h1 className="font-bold my-6 text-2xl">{name}</h1>
-      <p className="font-bold">{cuisines.join(", ")}</p>
-      {categories.map((category, index) => (
-        <RestaurantCategory
-          key={index}
-          data={category.card.card}
-          showItems={index === showIndex ? true : false}
-          setShowIndex = {() => setShowIndex(index)}
-        />
-      ))}
+    <div className="min-h-screen w-full bg-[#f5f5f5] px-4 py-8">
+      <div className="max-w-[1280px] mx-auto">
+        {/* Restaurant Info */}
+        <div className="pb-6 border-b border-gray-300">
+          <h1 className="text-2xl font-bold text-gray-800">{name}</h1>
+          <p className="text-gray-500 text-sm mt-1">{cuisines.join(", ")}</p>
+
+          <div className="flex flex-wrap items-center gap-3 mt-4 text-xs text-gray-700">
+            <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">
+              ⭐ {avgRating}
+            </span>
+            <span className="bg-gray-100 px-2 py-0.5 rounded-full">
+              {costForTwoMessage}
+            </span>
+            <span className="bg-gray-100 px-2 py-0.5 rounded-full">
+              {totalRatingsString}
+            </span>
+            {sla?.slaString && (
+              <span className="bg-gray-100 px-2 py-0.5 rounded-full">
+                ⏱️ {sla.slaString}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Menu Section */}
+        <div className="mt-6 bg-white rounded-md">
+          {categories.map((category, index) => (
+            <RestaurantCategory
+              key={index}
+              data={category.card.card}
+              showItems={index === showIndex}
+              setShowIndex={() => setShowIndex(index)}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

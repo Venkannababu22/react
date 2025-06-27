@@ -1,8 +1,9 @@
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -10,8 +11,6 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
 
   // const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
-
-  console.log("Body rendered");
 
   //dont use this pattern, it is not a good practice to define a state variable inside a component
   // it is better to define it at the top level of the component
@@ -22,6 +21,8 @@ const Body = () => {
   // if(){
   //   const [searchText, setSearchText] = useState("");
   // }
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   useEffect(() => {
     fetchData();
@@ -47,31 +48,32 @@ const Body = () => {
     );
   };
 
-  console.log(listOfRestaurants);
-
   const onlineStatus = useOnlineStatus();
   if (!onlineStatus) {
     return (
-      <h1>Looks like you are offline, please check your internet connection</h1>
+      <h1 className="text-center text-red-500 text-xl mt-10">
+        Looks like you are offline, please check your internet connection
+      </h1>
     );
   }
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
-      <div className="filter flex items-center">
-        <div className="m-4 p-4">
+    <div className="body px-6 py-4 bg-[#f5f5f5] min-h-screen">
+      <div className="filter flex flex-wrap items-center justify-between bg-white p-4 rounded-lg shadow-sm mb-6">
+        <div className="flex items-center flex-wrap gap-2">
           <input
             type="text"
-            className="border border-solid border-black rounded-md p-1 mx-2"
+            className="border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-orange-500"
             value={searchText}
+            placeholder="Search for restaurants..."
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="px-4 py-2 mx-2 bg-violet-200 rounded-lg shadow-md hover:bg-violet-300"
+            className="bg-orange-500 text-white px-4 py-2 rounded-md text-sm hover:bg-orange-600 transition-all"
             onClick={() => {
               let filteredRestaurants = listOfRestaurants.filter((restaurant) =>
                 restaurant.info.name
@@ -86,9 +88,9 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div>
+        <div className="mt-2 sm:mt-0">
           <button
-            className="px-4 py-2 bg-violet-200 rounded-md shadow-lg hover:bg-violet-300"
+            className="bg-gray-100 text-gray-800 px-4 py-2 rounded-md text-sm hover:bg-gray-200 transition-all"
             onClick={() => {
               const filteredList = listOfRestaurants.filter(
                 (res) => res.info.avgRating > 4.6
@@ -99,8 +101,17 @@ const Body = () => {
             Top Rated Restaurants
           </button>
         </div>
+        <div className="flex items-center mt-2 sm:mt-0">
+          <label className="mr-2 text-sm text-gray-700">UserName</label>
+          <input
+            type="text"
+            className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-orange-500"
+            onChange={(e) => setUserName(e.target.value)}
+            value={loggedInUser}
+          />
+        </div>
       </div>
-      <div className="flex flex-wrap justify-around">
+      <div className="flex flex-wrap justify-center gap-6">
         {filteredRest.map((restaurant) => (
           <Link
             key={restaurant.info.id}
@@ -111,7 +122,7 @@ const Body = () => {
             ) : (
              
             )} */}
-             <RestaurantCard resData={restaurant.info} />
+            <RestaurantCard resData={restaurant.info} />
           </Link>
         ))}
       </div>
