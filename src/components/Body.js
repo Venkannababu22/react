@@ -83,6 +83,7 @@ const Body = () => {
 
               setFilteredRest(filteredRestaurants);
               setSearchText("");
+              console.log(listOfRestaurants)
             }}
           >
             Search

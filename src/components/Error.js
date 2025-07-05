@@ -5,7 +5,7 @@ const Error = () => {
     console.error(error);
     return (
         <div>
-            <h1>{error.error.message}</h1>
+            <h1>{error?.error?.message}</h1>
         </div>
     )
 }

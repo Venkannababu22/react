@@ -9,9 +9,12 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu,";
 import UserContext from "./utils/UserContext";
 // import Grocery from "./components/Grocery";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 
 const Grocery = lazy(() => import("./components/Grocery"));
-// Lazy loading the Grocery component to optimize performance
+// Lazy loading the Grocery component to optimize performance`
 
 const AppLayout = () => {
   const [userName, setUserName] = useState();
@@ -25,12 +28,14 @@ const AppLayout = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-      <div className="app">
-        <Header />
-        <Outlet />
-      </div>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app">
+          <Header />
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -66,6 +71,10 @@ const appRouter = createBrowserRouter([
         // Dynamic route for restaurant menu
         element: <RestaurantMenu />,
       },
+      {
+        path: "/cart",
+        element: <Cart />,
+      }
     ],
     errorElement: <Error />,
   },

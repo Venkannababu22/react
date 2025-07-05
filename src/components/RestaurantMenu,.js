@@ -5,6 +5,8 @@ import RestaurantCategory from "./RestaurantCategory";
 import { useState } from "react";
 
 const RestaurantMenu = () => {
+  // useParams is a hook from react-router-dom that allows you to access the URL parameters
+  // It returns an object of key/value pairs of the dynamic segments of the URL
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
   const [showIndex, setShowIndex] = useState(0);
@@ -36,17 +38,17 @@ const RestaurantMenu = () => {
           <p className="text-gray-500 text-sm mt-1">{cuisines.join(", ")}</p>
 
           <div className="flex flex-wrap items-center gap-3 mt-4 text-xs text-gray-700">
-            <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">
+            <span className="bg-green-100 text-green-700 px-2 py-0.5 font-semibold">
               ⭐ {avgRating}
             </span>
-            <span className="bg-gray-100 px-2 py-0.5 rounded-full">
+            <span className="bg-gray-100 px-2 py-0.5">
               {costForTwoMessage}
             </span>
-            <span className="bg-gray-100 px-2 py-0.5 rounded-full">
+            <span className="bg-gray-100 px-2 py-0.5">
               {totalRatingsString}
             </span>
             {sla?.slaString && (
-              <span className="bg-gray-100 px-2 py-0.5 rounded-full">
+              <span className="bg-gray-100 px-2 py-0.5">
                 ⏱️ {sla.slaString}
               </span>
             )}

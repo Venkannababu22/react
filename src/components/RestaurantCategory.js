@@ -5,6 +5,7 @@ const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
     setShowIndex();
   };
 
+
   return (
     <div>
       {/* Header */}
@@ -21,9 +22,11 @@ const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
 
         {/* Accordion Body */}
         {showItems && <ItemList items={data.itemCards} />}
+        
       </div>
     </div>
   );
+  
 };
 
 export default RestaurantCategory;

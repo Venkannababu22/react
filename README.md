@@ -62,3 +62,28 @@
 # 2 types of Routing in web apps
     - Client side Routing
     - Server side Routing
+
+# Redux Toolkit
+    - Install @reduxjs/toolkit and react-redux 
+    - Build our store (js file)
+    - Connect our store to our app
+    - Create a cart slice
+    - dispach(action)
+    - Read data using selector
+
+# Types of testing (developer)
+    - Unit testing - testing a specific component 
+    - Integrated testing - testing the components that are connected. (menu and cart are connected.). Integration of multiple components. 
+    - End to end testing (e2e)
+
+# Setting up testing 
+    - Install React testing library
+    - Installed jest
+    - Installe babel dependencies and configured babel by creating a new babel.config.js file
+    - Configure parcel config file to disable default babel configuration.
+    - Jest configration
+    - Install jsdom library
+    - Install @babel/preset-react - to make JSX work in test cases
+    - Include @babel/preset-react - indside my babel config
+    - Install @testing-library/jest-dom
+    

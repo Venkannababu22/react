@@ -1,8 +1,9 @@
 import { LOGO_URL } from "../utils/constants";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
@@ -10,13 +11,16 @@ const Header = () => {
 
   const { loggedInUser } = useContext(UserContext);
 
-  // if no dependencies are passed, useEffect runs after every render
+   const cartItems = useSelector((store) => store.cart.items);
+  // useSelector is a hook that allows you to extract data from the Redux store state,
+  // using a selector function. It subscribes to the Redux store and will re-render
+  // the component whenever the selected state changes.
+
+
+  // if no dependencies are passed, useEffect runs after every render                       
   // if an empty array is passed, useEffect runs only once after the first render
   // if dependencies are passed, useEffect runs after the first render and whenever the dependencies change
 
-  useEffect(() => {
-    console.log("useEffect called in Header");
-  }, [btnName]);
 
   return (
     <div className="flex justify-between items-center shadow-md px-6 py-4 bg-white">
@@ -37,6 +41,9 @@ const Header = () => {
           </li>
           <li className="hover:text-orange-500 transition">
             <Link to="/grocery">Grocery</Link>
+          </li>
+           <li className="hover:text-orange-500 transition">
+            <Link to="/cart">Cart ({cartItems.length})</Link>
           </li>
           <button
             className="ml-2 px-3 py-1 border border-orange-500 text-orange-500 rounded-md hover:bg-orange-500 hover:text-white transition"
