@@ -7,7 +7,11 @@ const RestaurantCard = ({ resData }) => {
     resData;
 
   return (
-    <div className="m-4 p-4 w-[260px] bg-white rounded-xl border border-gray-100 shadow hover:shadow-lg transition duration-200 cursor-pointer">
+    <div 
+      data-testid="resCard"
+      className="m-4 p-4 w-[260px] bg-white rounded-xl border border-gray-100 shadow hover:shadow-lg transition duration-200 cursor-pointer"
+      
+    >
       <img
         className="rounded-lg w-full h-44 object-cover mb-3"
         alt="card-img"
@@ -29,7 +33,9 @@ const RestaurantCard = ({ resData }) => {
           ⭐ {avgRating}
         </span>
         <span className="text-xs font-medium text-gray-500">{costForTwo}</span>
-        <span className="text-xs font-medium text-gray-500">{sla.slaString}</span>
+        <span className="text-xs font-medium text-gray-500">
+          {sla.slaString}
+        </span>
       </div>
     </div>
   );

@@ -6,6 +6,24 @@ import "@testing-library/jest-dom";
 // It tests if the Contact component renders correctly and contains the expected elements
 
 describe("Contact Component Tests", () => {
+
+  // beforeAll(() => {
+  //   console.log("Before All")
+  // })
+
+  // beforeEach(() => {
+  //   console.log("Before Each")
+  // })
+
+  // afterAll(() => {
+  //   console.log("After All")
+  // })
+
+  // afterEach(() => {
+  //   console.log("After Each")
+  // })
+
+
   it("Should load Contact page", () => {
     render(<Contact />);
     // const heading = screen.getByRole("heading");

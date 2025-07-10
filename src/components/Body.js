@@ -33,10 +33,10 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
-    if (!data.ok) {
-      console.error("Failed to fetch data");
-      return;
-    }
+    // if (!data.ok) {
+    //   console.error("Failed to fetch data");
+    //   return;
+    // }
 
     const json = await data.json();
     //Optional chaining to safely access nested properties
@@ -65,6 +65,7 @@ const Body = () => {
         <div className="flex items-center flex-wrap gap-2">
           <input
             type="text"
+            data-testid="search-input"
             className="border border-gray-300 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-orange-500"
             value={searchText}
             placeholder="Search for restaurants..."
@@ -83,7 +84,6 @@ const Body = () => {
 
               setFilteredRest(filteredRestaurants);
               setSearchText("");
-              console.log(listOfRestaurants)
             }}
           >
             Search
@@ -91,12 +91,13 @@ const Body = () => {
         </div>
         <div className="mt-2 sm:mt-0">
           <button
-            className="bg-gray-100 text-gray-800 px-4 py-2 rounded-md text-sm hover:bg-gray-200 transition-all"
+            className="bg-gray-100 text-gray-800 px-4 py-2 rounded-md text-sm hover:bg-gray-200 transition-all cursor-pointer"
             onClick={() => {
               const filteredList = listOfRestaurants.filter(
-                (res) => res.info.avgRating > 4.6
+                (res) => res.info.avgRating >= 4.5
               );
-              setListOfRestaurants(filteredList);
+              setFilteredRest(filteredList); 
+              console.log(filteredList);
             }}
           >
             Top Rated Restaurants
@@ -114,7 +115,7 @@ const Body = () => {
       </div>
       <div className="flex flex-wrap justify-center gap-6">
         {filteredRest.map((restaurant) => (
-          <Link
+          <Link 
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
